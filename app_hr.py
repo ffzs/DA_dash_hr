@@ -29,12 +29,12 @@ def make_table_without_col(df):
     return table
 
 # data perpare
-df_o = pd.read_csv('HR_comma_sep.csv')
+df_o = pd.read_csv('data/HR_comma_sep.csv')
 df = df_o.copy()
 dfi = df_o.copy()
-df_data_description = pd.read_csv('data_description.csv')
-df_cluster = pd.read_csv('hr_cluster.csv')
-knn_scores = pd.read_csv('knn_scores.csv')
+df_data_description = pd.read_csv('data/data_description.csv')
+df_cluster = pd.read_csv('data/hr_cluster.csv')
+knn_scores = pd.read_csv('https://raw.githubusercontent.com/ffzs/DA_dash_hr/master/data/knn_scores.csv')
 knn_scores = knn_scores.set_index('Unnamed: 0')
 
 salary_dict = {"low":0, "medium":1, "high":2}
@@ -79,7 +79,7 @@ app = dash.Dash()
 # page header
 logo = html.Div([
         html.Div([
-            html.Img(src='http://www.uugai.com/logoa/logo_img_sc.php', height='50', width='150')
+            html.Img(src='https://raw.githubusercontent.com/ffzs/DA_dash_hr/master/img/logo1.png', height='50', width='150')
         ], className="ten columns padded")
     ], className="row gs-header")
 
