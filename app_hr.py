@@ -34,7 +34,7 @@ df = df_o.copy()
 dfi = df_o.copy()
 df_data_description = pd.read_csv('data/data_description.csv')
 df_cluster = pd.read_csv('data/hr_cluster.csv')
-knn_scores = pd.read_csv('https://raw.githubusercontent.com/ffzs/DA_dash_hr/master/data/knn_scores.csv')
+knn_scores = pd.read_csv('data/knn_scores.csv')
 knn_scores = knn_scores.set_index('Unnamed: 0')
 
 salary_dict = {"low":0, "medium":1, "high":2}
@@ -434,7 +434,8 @@ def update_scatter3d(employee_type, value0, value1):
         return fig
 
 
-external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
+external_css = [
+                "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
                 "//fonts.googleapis.com/css?family=Raleway:400,300,600",
                 "https://codepen.io/bcd/pen/KQrXdb.css",
