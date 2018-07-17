@@ -79,7 +79,7 @@ app = dash.Dash()
 # page header
 logo = html.Div([
         html.Div([
-            html.Img(src='https://raw.githubusercontent.com/ffzs/DA_dash_hr/master/img/logo1.png', height='50', width='150')
+            html.Img(src='https://raw.githack.com/ffzs/DA_dash_hr/master/img/logo1.png', height='50', width='150')
         ], className="ten columns padded")
     ], className="row gs-header")
 
@@ -151,8 +151,6 @@ row3 = html.Div([
 ], className="row ")
 
 # row4
-colormaps = ['Viridis',"RdBu",'Greys','YIGnBu','Greens','YIOrRd','Bluered','Picnic','Portland','Jet','Hot','Blackbody',
-             'Earth','Electric']
 row4 = html.Div([
     html.Div([
         html.H6(["全体相关性值热力图"],
@@ -175,15 +173,16 @@ row4 = html.Div([
                 className="gs-header gs-table-header padded"),
         html.Br([]),
         dcc.Markdown('''     
-1. 离职率为23.8%，接近公司员工的四分之一
-2. 每月工作时间高于287小时的都离职了
-3. 满意度低于0.11的都离职了
-4. 离职员工工作年限集中于3-5年
-5. 离职人员多为中低收入者，且少有工作失误
-6. 有经验员工应为参加项目多员工,即参加项目数为5-7个的员工
-7. 参加项目6-7个的员工有共性，满意度极低，工作时间长，绩效高，工资中下，未晋升，接近三分之二离职了，其中7个项目的全部离职
-8. 与离职相关性最强变量为满意度，其次是工资水平
-9. 离职人员、有经验人员在各个职业分布比较均匀，即相关性不强
++ 离职率为23.8%，接近公司员工的四分之一
++ 每月工时的平均值为201小时，两个峰值区分别为150左右和260左右
++ 每月工作时间高于287小时的都离职了
++ 满意度低于0.11的都离职了
++ 离职员工工作年限集中于3-5年
++ 离职人员多为中低收入者，且少有工作失误
++ 有经验员工应为参加项目多员工,即参加项目数为5-7个的员工
++ 参加项目6-7个的员工有共性，满意度极低，工作时间长，绩效高，工资中下，未晋升，接近三分之二离职了，其中7个项目的全部离职
++ 根据变量相关性可知与离职相关性最强变量为满意度，其次是工资水平
++ 离职人员、有经验人员在各个职业分布比较均匀，即相关性不强
         '''),
     ], className="seven columns"),
 ], className="row ")
@@ -265,29 +264,6 @@ row6 = html.Div([
         dcc.Graph(id='scatter3d')
     ], className="seven columns"),
     html.Div([
-        html.H6(["离职员工数据分析"],
-                className="gs-header gs-table-header padded"),
-        html.Br([]),
-        dcc.Markdown('''     
-1. 离职员工数据的皮尔森相关性可知，他们的每月工时、绩效、工作年限、参加项目成强相关，同时与满意度成较强相关，与其他变量基本没有关系。
-2. 第一条可以理解为就是说你工作是否努力，在公司工作了多少年，经验是否丰富，跟你开多少工资、有无升职机会没有任何关系
-3. 根据3D散点图可以看出，离职员工有很明显的聚类现象，大部分离职人员可以被分为三类：
-    + 绩效低0.4左右，每月工作时长低140左右，满意度中下0.4左右，工作年限3年，参加项目3个
-    + 绩效高0.77-1，工时长240-310小时，满意度极低0.1左右，工作年限4-5年，参加项目6-7个
-    + 绩效高0.8-1，工时长210-270小时，满意度高0.7以上，工作年限5-6年，参加项目4-5个
-4. 第一类员工工作不积极，他们的离职是公司很喜欢的，也许是公司辞退的
-5. 第二类员工工作积极、经验丰富，满意度极低，容易识别，属于公司的有价值员工，离职很可惜
-6. 第三类员工工作情况稍差于第二类，不过也算认真，满意度高，具有隐蔽性，属于有价值员工
-7. 
-8. 
-9.
-                '''),
-    ], className="five columns"),
-], className="row ")
-
-# row7
-row7 = html.Div([
-    html.Div([
         html.H6(["随机森林分类预测离职员工"],
                 className="gs-header gs-table-header padded"),
         html.Br(),
@@ -295,30 +271,60 @@ row7 = html.Div([
 + 随机森林的预测准确率为98.57%
 + 查准率为99.43%
 + 查重率为94.74%
-        '''),
+                '''),
         html.H6(["knn分类预测离职员工"],
                 className="gs-header gs-table-header padded"),
         html.Table(make_table_without_col(knn_scores.round(2))),
         dcc.Graph(id='scatter',
-            figure={
-                'data':[
-                    go.Scatter(
-                        x = knn_scores.T.k.tolist(),
-                        y = knn_scores.T.score.tolist(),
-                        mode='markers'
-                    )],
-              'layout':go.Layout(margin=dict(l=30, b=30, t=0,r=15),height=150)
-            }),
+                  figure={
+                      'data': [
+                          go.Scatter(
+                              x=knn_scores.T.k.tolist(),
+                              y=knn_scores.T.score.tolist(),
+                              mode='markers'
+                          )],
+                      'layout': go.Layout(margin=dict(l=30, b=30, t=0, r=15), height=150)
+                  }),
         html.Table(),
         dcc.Markdown('''
 + k为1时准确率最高，预测准确率为100%，故该模型k取1
 + k为1时查准率、查全率皆为100%
-        '''),
+                '''),
     ], className="five columns"),
+], className="row ")
+
+# row7
+row7 = html.Div([
+    html.Div([
+        html.H6(["离职员工数据分析"],
+                className="gs-header gs-table-header padded"),
+        html.Br([]),
+        dcc.Markdown('''     
++ 根据离职员工数据的皮尔森相关性可知，他们的每月工时、绩效、工作年限、参加项目成强相关，同时与满意度成较强相关，与其他变量基本没有关系。
++ 第一条可以理解为就是说你工作是否努力，在公司工作了多少年，经验是否丰富，跟你开多少工资、有无升职机会没有任何关系
++ 根据3D散点图可以看出，离职员工有很明显的聚类现象，大部分离职人员可以被分为三类：
+    1. 绩效低0.4左右，每月工作时长低140左右，满意度中下0.4左右，工作年限3年，参加项目3个
+    2. 绩效高0.77-1，工时长240-310小时，满意度极低0.1左右，工作年限4-5年，参加项目6-7个
+    3. 绩效高0.8-1，工时长210-270小时，满意度高0.7以上，工作年限5-6年，参加项目4-5个
++ 按聚类来看第一类员工1515左右人，第二类员工886人，第三类员工879人，第一类员工占比比较大
++ 第一类员工从工时绩效来看不算是优秀的员工，他们的离职对于公司来说可以接受
++ 第二类员工工作积极、经验丰富，满意度极低，容易识别，属于公司的有价值员工，离职很可惜
++ 第三类员工工作情况稍差于第二类，不过也算认真，满意度高，具有隐蔽性，属于有价值员工
+                '''),
+
+    ], className="seven columns"),
     html.Div([
         html.H6(["总结、思考、策略"],
                 className="gs-header gs-table-header padded"),
-    ], className="seven columns"),
+        html.Br([]),
+        dcc.Markdown('''
++ 总结：对于员工是否离职的预测knn和随机森林都有不错的表现都可以胜任，其中knn模型k为1时准确率为100%可能跟离职人员数据区域性明显，且重复数据多有关；对于离职人员的聚类
+DBSCAN比K-means更适合。  
++ 思考：想要对公司员工的情况了解更加透彻的话仅仅是一年的数据还不够充分，最好要有连续几年的数据才能的高更将详尽的结果。   
++ 策略：第二类、第三类离职人员属于公司的优秀员工，他们的离职是公司的损失，hr应该尽早沟通才对，适当的调整工资或者给予其晋升机会；
+将经验丰富人员的离职率归入管理人员的考核里可以适当减少管理人员与此类员工之间的摩擦
+                '''),
+    ], className="five columns"),
 ], className="row ")
 
 # app layout
@@ -434,11 +440,10 @@ def update_scatter3d(employee_type, value0, value1):
         return fig
 
 
-external_css = [
-                "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
+external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
                 "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
                 "//fonts.googleapis.com/css?family=Raleway:400,300,600",
-                "https://codepen.io/bcd/pen/KQrXdb.css",
+                "http://raw.githack.com/ffzs/DA_dash_hr/master/css/my.css",
                 "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"]
 
 for css in external_css:
