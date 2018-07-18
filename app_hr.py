@@ -4,7 +4,6 @@ import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
-import random
 
 def make_dash_table(df):
     table = []
@@ -75,6 +74,7 @@ corr_l = df_l.corr('pearson').round(3)
 # df_lc = df_c.groupby('是否离职').get_group(1).drop(columns=['是否离职'])
 
 app = dash.Dash()
+server = app.server
 
 # page header
 logo = html.Div([
@@ -456,4 +456,4 @@ for js in external_js:
     app.scripts.append_script({"external_url": js})
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', debug=True)
